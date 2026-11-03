@@ -5,7 +5,7 @@ A minimal 3D first-person Hello Neighbor remake: one two-story house, a key, an 
 
 All visuals are built from macroquad primitives (`draw_cube`), with no image or 3D assets.
 
-![Screenshot](reference/screenshot.jpg)
+![Screenshot](app/screenshot.jpg)
 
 ## Build & run
 
