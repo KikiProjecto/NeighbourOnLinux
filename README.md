@@ -11,7 +11,7 @@ All visuals are built from macroquad primitives (`draw_cube`), with no image or 
 
 ## Build & run
 
-```sh
+```bash
 cd app && cargo build && cargo run
 ```
 
