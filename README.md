@@ -1,7 +1,9 @@
 # Neighbour on Linux
 ## built with Rust and macroquad
 
-A minimal 3D first-person Hello Neighbor remake: one two-story house, a key, an exit door, and a neighbor who patrols, grows suspicious, then chases.
+lightweight 3D first-person Hello Neighbor remake with two-story house, a key, an exit door, and a neighbor who patrols, grows suspicious, then chases.
+
+planned to be compiled as Flatpak package and able to run smoothly on every distros
 
 All visuals are built from macroquad primitives (`draw_cube`), with no image or 3D assets.
 
@@ -29,4 +31,4 @@ cargo run
 
 ## Objective
 
-Take the key on the first floor, then open the front door to escape. Don't get caught by the neighbor.
+Take the key on the first floor, then open the front door to escape. Don't get caught by the neighbor. 
