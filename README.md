@@ -1,13 +1,12 @@
-# Hello Neighbor
-## built with Rust + macroquad
+# Hello Neighbor — Rust + macroquad
 
-Remake 3D first-person Hello Neighbor versi minimal: satu rumah dua lantai, kunci, pintu keluar, dan tetangga yang berpatroli, mencurigai, lalu mengejar.
+A minimal 3D first-person Hello Neighbor remake: one two-story house, a key, an exit door, and a neighbor who patrols, grows suspicious, then chases.
 
-Semua visual dibuat dari primitif macroquad (`draw_cube`), tanpa asset gambar/3D.
+All visuals are built from macroquad primitives (`draw_cube`), with no image or 3D assets.
 
 ![Screenshot](app/screenshot.png)
 
-## Build & jalankan
+## Build & run
 
 ```sh
 cd app
@@ -15,18 +14,18 @@ cargo build
 cargo run
 ```
 
-## Kontrol
+## Controls
 
-| Tombol | Aksi |
+| Key | Action |
 | --- | --- |
-| WASD | Gerak |
-| Mouse | Lihat sekeliling |
-| Space | Lompat |
-| Shift | Lari |
-| Ctrl | Jongkok |
-| E | Interaksi (ambil kunci/kotak, buka pintu, lepas kotak) |
-| R | Ulang setelah menang/kalah |
+| WASD | Move |
+| Mouse | Look around |
+| Space | Jump |
+| Shift | Sprint |
+| Ctrl | Crouch |
+| E | Interact (take key/box, open door, drop box) |
+| R | Restart after winning or losing |
 
-## Tujuan
+## Objective
 
-Ambil kunci di lantai 1, lalu buka pintu depan untuk kabur. Jangan sampai tertangkap tetangga.
+Take the key on the first floor, then open the front door to escape. Don't get caught by the neighbor.
