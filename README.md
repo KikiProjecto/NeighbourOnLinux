@@ -1,5 +1,5 @@
-#Neighbour on Linux
-##built with Rust and macroquad
+# Neighbour on Linux
+## built with Rust and macroquad
 
 A minimal 3D first-person Hello Neighbor remake: one two-story house, a key, an exit door, and a neighbor who patrols, grows suspicious, then chases.
 
