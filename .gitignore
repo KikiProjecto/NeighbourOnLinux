@@ -1,18 +1,11 @@
-# Rust build artifacts
 /app/target/
 /target/
 **/*.rs.bk
-
-# Generated screenshots (app/screenshot.png is a documented asset and stays tracked)
 /app/shot.png
 /app/shot*.png
 !/app/screenshot.png
-
-# Host-specific Cargo config (sandbox linker paths must never be committed)
 /app/.cargo/
 /.cargo/
-
-# Sandbox / harness artifacts
 /build-activity.log
 /build-activity.md
 /feed.json
@@ -24,26 +17,18 @@
 /capture/
 /inbox/
 /reference/
-
-# Logs and backups
 *.log
 *.bak
 *.bak[0-9]
 *.swp
 *.swo
 *~
-
-# OS metadata
 .DS_Store
 Thumbs.db
 desktop.ini
-
-# Editors
 .vscode/
 .idea/
 *.iml
-
-# Secrets — never commit
 .env
 .env.*
 !.env.example
@@ -56,7 +41,6 @@ id_rsa*
 id_ed25519*
 .netrc
 credentials*
-
 CLAUDE.md
 STATE.md
 ROADMAP.md
