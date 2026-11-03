@@ -1,4 +1,5 @@
-# Hello Neighbor — Rust + macroquad
+# Hello Neighbor
+## built with Rust + macroquad
 
 Remake 3D first-person Hello Neighbor versi minimal: satu rumah dua lantai, kunci, pintu keluar, dan tetangga yang berpatroli, mencurigai, lalu mengejar.
 
