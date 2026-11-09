@@ -4,6 +4,10 @@
 /app/shot.png
 /app/shot*.png
 !/app/screenshot.png
+/.flatpak-build/
+/.flatpak-repo/
+*.flatpak
+*.tmp
 /app/.cargo/
 /.cargo/
 /build-activity.log
