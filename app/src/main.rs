@@ -1,4 +1,5 @@
 mod ai;
+mod audio;
 mod capture;
 mod game;
 mod items;
@@ -60,7 +61,8 @@ async fn run(args: Args) {
     set_cursor_grab(true);
     show_mouse(false);
 
-    let mut game = game::GameState::new();
+    let audio = audio::Audio::load().await;
+    let mut game = game::GameState::new_with_audio(audio);
     let mut frames = 0u32;
     loop {
         let dt = get_frame_time().min(0.05);

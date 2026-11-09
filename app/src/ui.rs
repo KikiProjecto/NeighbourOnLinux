@@ -12,13 +12,19 @@ pub fn draw(game: &GameState, width: f32, height: f32) {
     draw_line(center_x, center_y + 3.0, center_x, center_y + 8.0, 2.0, WHITE);
 
     draw_text(
-        "WASD gerak   E interaksi   Space lompat   Shift lari   Ctrl jongkok",
+        "WASD gerak   E interaksi   Space lompat   Shift lari   Ctrl jongkok   RMB / F lempar",
         16.0,
         26.0,
         18.0,
         Color::new(0.92, 0.92, 0.90, 1.0),
     );
-    draw_text("R ulang setelah menang/kalah", 16.0, 48.0, 16.0, Color::new(0.80, 0.80, 0.78, 1.0));
+    draw_text(
+        "R ulang setelah menang/kalah",
+        16.0,
+        48.0,
+        16.0,
+        Color::new(0.80, 0.80, 0.78, 1.0),
+    );
 
     if let Some((label, color)) = game.alert_label() {
         let size = 30u16;

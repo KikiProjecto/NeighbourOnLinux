@@ -30,8 +30,10 @@ pub fn self_test() {
     test_wall_collision();
     test_stair_step();
     test_ai_states();
+    test_neighbor_wall_collision();
     test_item_pickup();
     test_carry_drop();
+    test_box_throw();
     println!("self-test ok");
 }
 
@@ -84,8 +86,22 @@ fn test_ai_states() {
     neighbor.update(3.0, far, &colliders);
     assert_eq!(neighbor.state, AlertState::Suspicious);
 
-    neighbor.update(3.0, far, &colliders);
+    neighbor.update(4.0, far, &colliders);
     assert_eq!(neighbor.state, AlertState::Patrol);
+}
+
+fn test_neighbor_wall_collision() {
+    let wall = Aabb::from_center(vec3(0.0, 1.0, 0.0), vec3(1.0, 2.5, 4.0));
+    let colliders = [wall];
+    let mut neighbor = Neighbor::new(vec3(-3.0, 0.0, 0.0), vec![]);
+
+    neighbor.move_towards(vec3(5.0, 0.0, 0.0), 1.0, 10.0, &colliders);
+
+    assert!(
+        neighbor.pos.x < -0.8 && neighbor.pos.x > -1.0,
+        "neighbor crossed wall: x={}",
+        neighbor.pos.x
+    );
 }
 
 fn test_item_pickup() {
@@ -103,9 +119,27 @@ fn test_item_pickup() {
 
 fn test_carry_drop() {
     let mut game = GameState::new();
-    game.player.pos = vec3(game.world.object_pos.x, 0.0, game.world.object_pos.z);
+    game.player.pos = vec3(game.box_prop.pos.x, 0.0, game.box_prop.pos.z);
     game.interact();
-    assert!(game.items.carrying, "object not picked up");
+    assert!(game.items.carrying, "box not picked up");
     game.interact();
-    assert!(!game.items.carrying, "object not dropped");
+    assert!(!game.items.carrying, "box not dropped");
+}
+
+fn test_box_throw() {
+    let ground = Aabb::from_center(vec3(0.0, -0.25, 0.0), vec3(20.0, 0.5, 20.0));
+    let colliders = [ground];
+    let mut game = GameState::new();
+    game.items.carrying = true;
+    game.throw_box();
+    assert!(!game.items.carrying, "box still carried after throw");
+    assert!(game.box_prop.is_flying, "box not flying after throw");
+
+    let mut landed = false;
+    for _ in 0..60 {
+        if game.box_prop.update(0.05, &colliders) {
+            landed = true;
+        }
+    }
+    assert!(landed, "box never impacted colliders");
 }
