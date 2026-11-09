@@ -10,15 +10,15 @@ mod world;
 use macroquad::miniquad::conf::{LinuxBackend, Platform};
 use macroquad::prelude::*;
 
-struct Args {
+struct Args{
     screenshot: Option<String>,
     self_test: bool,
     frames: Option<u32>,
 }
 
-fn main() {
+fn main(){
     let args = parse_args();
-    if args.self_test {
+    if args.self_test{
         capture::self_test();
         return;
     }
