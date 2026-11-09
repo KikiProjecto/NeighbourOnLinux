@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>org.helloneighbor.HelloNeighbor</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>MIT</project_license>
+  <name>Hello Neighbor</name>
+  <summary>A stealth horror game remake in pure Rust and Macroquad</summary>
+  <description>
+    <p>
+      A minimal, ultra-lightweight 3D first-person remake of Hello Neighbor written in pure Rust and Macroquad.
+      Sneak into your neighbor's house, locate the key, and escape without being caught.
+    </p>
+    <p>Features:</p>
+    <ul>
+      <li>First-person movement with crouch, sprint, and jump mechanics</li>
+      <li>Smart reactive AI with line-of-sight detection and suspicious states</li>
+      <li>Distraction mechanics: throw objects to divert the neighbor</li>
+      <li>High-performance procedural 3D visuals running at under 15MB of RAM</li>
+    </ul>
+  </description>
+  <launchable type="desktop-id">org.helloneighbor.HelloNeighbor.desktop</launchable>
+  <provides>
+    <binary>hello-neighbor</binary>
+  </provides>
+  <content_rating type="oars-1.1">
+    <content_attribute id="violence-cartoon">mild</content_attribute>
+  </content_rating>
+  <releases>
+    <release version="0.1.0" date="2026-11-09">
+      <description>
+        <p>Initial Flatpak release with full game loop and procedural sound effects.</p>
+      </description>
+    </release>
+  </releases>
+</component>

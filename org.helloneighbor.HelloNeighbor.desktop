@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Hello Neighbor
+Comment=Stealth horror game remake in pure Rust & macroquad
+Exec=hello-neighbor
+Icon=org.helloneighbor.HelloNeighbor
+Categories=Game;ActionGame;
+Terminal=false
+StartupNotify=true
+Keywords=game;stealth;horror;neighbor;rust;

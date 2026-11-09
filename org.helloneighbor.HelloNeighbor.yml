@@ -1,0 +1,28 @@
+app-id: org.helloneighbor.HelloNeighbor
+runtime: org.freedesktop.Platform
+runtime-version: '26.08'
+sdk: org.freedesktop.Sdk
+command: hello-neighbor
+
+finish-args:
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --share=ipc
+  - --device=dri
+  - --socket=pulseaudio
+
+modules:
+  - name: hello-neighbor
+    buildsystem: simple
+    build-commands:
+      - cargo build --release --manifest-path app/Cargo.toml
+      - install -Dm755 app/target/release/hello-neighbor /app/bin/hello-neighbor
+      - install -Dm644 reference/icon.svg /app/share/icons/hicolor/scalable/apps/org.helloneighbor.HelloNeighbor.svg
+      - install -Dm644 org.helloneighbor.HelloNeighbor.desktop /app/share/applications/org.helloneighbor.HelloNeighbor.desktop
+      - install -Dm644 org.helloneighbor.HelloNeighbor.metainfo.xml /app/share/metainfo/org.helloneighbor.HelloNeighbor.metainfo.xml
+    build-options:
+      env:
+        CARGO_HOME: /run/build/hello-neighbor/cargo
+    sources:
+      - type: dir
+        path: .
