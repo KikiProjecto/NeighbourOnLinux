@@ -1,10 +1,26 @@
 [package]
 name = "hello-neighbor"
-version = "0.1.0"
-edition = "2021"
+version = "0.2.0"
+edition = "2024"
+rust-version = "1.97.1"
+description = "An unofficial Hello Neighbor inspired stealth sandbox built with Bevy"
 
 [dependencies]
-macroquad = "0.4.16"
+bevy = { version = "0.20.1", default-features = false, features = [
+    "default_app", "3d_bevy_render", "ui_bevy_render", "bevy_winit",
+    "multi_threaded", "default_font", "keyboard", "mouse", "x11", "wayland",
+    "bevy_audio", "wav", "png"
+] }
+
+[profile.dev]
+opt-level = 1
+debug = 0
+
+[profile.dev.package."*"]
+opt-level = 2
 
 [profile.release]
-opt-level = 2
+opt-level = 3
+lto = "thin"
+codegen-units = 1
+strip = true

@@ -1,32 +1,171 @@
-# Neighbour on Linux
-## built in pure Rust and macroquad
+# Hello Neighbor — The Impossible House
 
-lightweight 3D first-person Hello Neighbor remake with two-story house, a key, an exit door, and a neighbor who patrols, grows suspicious, then chases.
+An unofficial, original **Rust + Bevy 0.20.1** stealth-mystery fan prototype inspired primarily by the full-release Act 3 house. It is a procedural, playable blockout—not a complete remake or a verified reconstruction of the original floor plan. The game includes no original game assets.
 
-planned to be compiled as Flatpak package and able to run smoothly on every distros
+Explore a six-level impossible house, climb to its rooftop machinery, and follow the colored-key trail into a large underground maintenance labyrinth. A continuous morning-to-night cycle, reactive neighbor, environmental audio, and an original adaptive score shape each attempt.
 
-All visuals are built from macroquad primitives (`draw_cube`), with no image or 3D assets.
+> **Linux desktop:** Native Cargo builds and a verified Flatpak bundle are supported. The Flatpak uses the Freedesktop 26.08 runtime.
 
-<img src="app/screenshot.jpg" alt="ss" width="100%">
+## Screenshots
 
-## Build & run
+All images below are 1280×720 captures from the native build. Select an image to open it at full size.
 
-```bash
-cd app && cargo build && cargo run
+### The house through the day
+
+<table>
+<tr>
+<td align="center"><a href="docs/screenshots/morning.png"><img src="docs/screenshots/morning.png" width="300" alt="The impossible house in morning light"></a><br>Morning</td>
+<td align="center"><a href="docs/screenshots/afternoon.png"><img src="docs/screenshots/afternoon.png" width="300" alt="The impossible house in afternoon light"></a><br>Afternoon</td>
+<td align="center"><a href="docs/screenshots/evening.png"><img src="docs/screenshots/evening.png" width="300" alt="The house at evening"></a><br>Evening</td>
+<td align="center"><a href="docs/screenshots/night.png"><img src="docs/screenshots/night.png" width="300" alt="The house at night"></a><br>Night</td>
+</tr>
+</table>
+
+### Rooms and the neighbor
+
+<table>
+<tr>
+<td align="center"><a href="docs/screenshots/workshop.png"><img src="docs/screenshots/workshop.png" width="300" alt="The furnished workshop"></a><br>Workshop</td>
+<td align="center"><a href="docs/screenshots/archive.png"><img src="docs/screenshots/archive.png" width="300" alt="The blue-key archive"></a><br>Archive</td>
+<td align="center"><a href="docs/screenshots/tower.png"><img src="docs/screenshots/tower.png" width="300" alt="The rooftop tower machinery"></a><br>Tower gallery</td>
+<td align="center"><a href="docs/screenshots/neighbor.png"><img src="docs/screenshots/neighbor.png" width="300" alt="The articulated procedural neighbor"></a><br>The neighbor</td>
+</tr>
+<tr>
+<td align="center"><a href="docs/screenshots/kitchen-active.png"><img src="docs/screenshots/kitchen-active.png" width="300" alt="Kitchen appliances enabled for inspection"></a><br>Kitchen</td>
+<td align="center"><a href="docs/screenshots/living-room-active.png"><img src="docs/screenshots/living-room-active.png" width="300" alt="Living room household interactions"></a><br>Living room</td>
+<td align="center"><a href="docs/screenshots/bathroom-active.png"><img src="docs/screenshots/bathroom-active.png" width="300" alt="Bathroom shower interaction"></a><br>Bathroom</td>
+<td align="center"><a href="docs/screenshots/gallery-active.png"><img src="docs/screenshots/gallery-active.png" width="300" alt="Crooked gallery and paintings"></a><br>Gallery</td>
+</tr>
+</table>
+
+### Underground labyrinth
+
+<table>
+<tr>
+<td align="center"><a href="docs/screenshots/basement.png"><img src="docs/screenshots/basement.png" width="300" alt="Underground circuit machinery"></a><br>Boiler room</td>
+<td align="center"><a href="docs/screenshots/basement-lab.png"><img src="docs/screenshots/basement-lab.png" width="300" alt="Underground improvised laboratory"></a><br>Laboratory</td>
+<td align="center"><a href="docs/screenshots/basement-vault.png"><img src="docs/screenshots/basement-vault.png" width="300" alt="Underground evidence vault"></a><br>Evidence vault</td>
+<td align="center"><a href="docs/screenshots/controls-and-map.png"><img src="docs/screenshots/controls-and-map.png" width="300" alt="The basement map and controls guide"></a><br>Map and controls</td>
+</tr>
+</table>
+
+Inspection images document appearance and readability; they are not performance benchmarks or representations of unfinished mechanics.
+
+## What you can play
+
+- First-person walking, sprinting, crouching, jumping, step-up collision, flashlight, and carry/drop/throw box interactions.
+- Six connected house levels, a rooftop tower gallery, stairs, surrounding neighborhood, and procedural neighbor with patrol, hearing, occluded sight, investigation, chase, search, and capture memory.
+- A working progression: **blue key → archive → green key → greenhouse → red key → tower → stop windmill → disable generator → retrieve freezer keycard**.
+- Use the crowbar and keycard to descend into a **48.4 × 48.4 m, 12-chamber underground labyrinth**. Read the entrance board, open the Tab map, restore three circuits, collect the service key, and escape through the service exit.
+- Thirty-seven responsive household targets across 14 types, including lamps, television, telephone, drawers, cupboard, books, paintings, sink, shower, kettle, mailbox, doorbell, and tower dial. Use **E** while aiming at an object.
+- A two-minute default day/night cycle, environmental and machinery sound layers, and an original adaptive score with 13 themes and two arrangements per theme.
+- Compact English HUD, help/objectives, basement signage and map, procedural character animation, water/steam/dust effects, and a responsive low-graphics preset.
+
+The prototype does **not** yet include the original hot-crowbar/magnet/shower puzzle, a rideable trolley, wardrobe hiding, fear challenges, selectable inventory, keyhole peeking, full menus/settings, or final authored assets. The trolley starts and stops but is not rideable; the cupboard is a clue interaction, not a hiding place. The custom kinematic collision controller is designed for this axis-aligned blockout, not general rigid-body simulation.
+
+The house and implementation boundaries are described in [HOUSE_DESIGN.md](docs/HOUSE_DESIGN.md), [BASEMENT.md](docs/BASEMENT.md), and [ARCHITECTURE.md](docs/ARCHITECTURE.md). [Reference research](docs/HELLO_NEIGHBOR_RESEARCH.md) distinguishes the released game from Alpha versions. Native test coverage, current screenshots, and profiling caveats are in [POLISH_CHECKS.md](docs/POLISH_CHECKS.md) and [PERFORMANCE.md](docs/PERFORMANCE.md).
+
+## Run the Flatpak
+
+The package can be built as a local single-file `.flatpak` bundle. The x86_64 bundle built on November 21, 2026 is **14,432,864 bytes (13.77 MiB)**—well below both 500 MB and 1 GB. Its installed application payload is 75,635,712 bytes (about 75.6 MB); the Freedesktop runtime is a separate Flatpak dependency and is not included in the bundle size. On the tested setup, the build used **Flatpak 1.18.4**, `flatpak-builder` **1.4.12**, and the **Freedesktop 26.08** runtime/SDK with its `rust-stable` extension.
+
+Install the runtime and SDK extension if they are not already present:
+
+```sh
+flatpak install --user flathub org.freedesktop.Platform//26.08
+flatpak install --user flathub org.freedesktop.Sdk//26.08
+flatpak install --user flathub org.freedesktop.Sdk.Extension.rust-stable//26.08
 ```
+
+Then build, install, and launch the bundle:
+
+```sh
+./build-flatpak.sh
+flatpak install --user --bundle ./org.helloneighbor.HelloNeighbor.flatpak
+flatpak run org.helloneighbor.HelloNeighbor
+```
+
+The script vendors the lockfile-pinned Cargo dependencies on the host and compiles them offline inside the Flatpak SDK. It also exports `.flatpak-repo/` and creates `org.helloneighbor.HelloNeighbor.flatpak` in the project root. To launch the packaged diagnostic without opening the game window:
+
+```sh
+flatpak run --command=hello-neighbor org.helloneighbor.HelloNeighbor --self-test
+```
+
+To uninstall the per-user app:
+
+```sh
+flatpak uninstall --user org.helloneighbor.HelloNeighbor
+```
+
+## Build and run natively
+
+Requires Rust **1.97.1+**, a Vulkan-capable Linux graphics driver, and development libraries for Wayland/X11 and ALSA. The application enables both X11 and Wayland window backends.
+
+```sh
+cd app
+cargo run --locked
+```
+
+For slower GPUs, use the opt-in **960×540 low-graphics** mode. It disables bloom and dynamic shadows without changing gameplay or physics:
+
+```sh
+cargo run --locked -- --low-graphics
+```
+
+No external game assets are needed. The previous Macroquad renderer is no longer used.
 
 ## Controls
 
-| Key | Action |
+| Input | Action |
 | --- | --- |
-| WASD | Move |
-| Mouse | Look around |
+| WASD / mouse | Move / look |
 | Space | Jump |
-| Shift | Sprint |
-| Ctrl | Crouch |
-| E | Interact (take key/box, open door, drop box) |
-| R | Restart after winning or losing |
+| Shift | Sprint; hold while falling with umbrella to slow descent |
+| Ctrl or C | Crouch |
+| E | Pick up, unlock, operate a machine, or use the tower ladder |
+| Q / G | Drop / throw a carried box |
+| F | Toggle flashlight |
+| H | Show/hide objective and detailed control guide |
+| Tab | Open/close underground map after reading the entrance board |
+| M | Mute/restore music; ambience and effects remain separate |
+| Esc / left click | Pause and release cursor / resume |
+| R | Retry after capture or completion |
+| F10 | Exit |
 
-## Objective
+## Checks and screenshot capture
 
-Take the key on the first floor, then open the front door to escape. Don't get caught by the neighbor. 
+From the repository root:
+
+```sh
+cargo fmt --manifest-path app/Cargo.toml --check
+cargo clippy --manifest-path app/Cargo.toml --locked --all-targets -- -D warnings
+cargo test --manifest-path app/Cargo.toml --locked
+cargo build --manifest-path app/Cargo.toml --locked
+./app/target/debug/hello-neighbor --self-test
+```
+
+The suite covers puzzle progression, the underground navigation graph and controls, retry/collision behavior, household interactions, sound/music logic, and the optimized occlusion-ray broad phase. Native render smoke checks and the performance replay are described in [PERFORMANCE.md](docs/PERFORMANCE.md).
+
+The binary also supports reproducible render captures and an opt-in encounter replay:
+
+```sh
+./app/target/debug/hello-neighbor --frames 120 --quiet
+./app/target/debug/hello-neighbor --overview --time 9 --screenshot morning.png --quiet
+./app/target/debug/hello-neighbor --view basement --showcase --screenshot basement.png --quiet
+./app/target/debug/hello-neighbor --profile-encounter /tmp/encounter.csv --quiet
+```
+
+`--view` accepts `workshop`, `archive`, `station`, `tower`, `kitchen`, `living-room`, `bathroom`, `gallery`, `neighbor`, `basement`, `basement-lab`, or `basement-vault`. `--showcase` activates household props for inspection captures only and requires both `--view` and `--screenshot`. Captures use a fixed 1280×720 target; `--low-graphics` does not reduce screenshot resolution.
+
+Useful options include `--time HOUR` (initial simulated hour in `[0,24)`), `--day-length SECONDS` (minimum 24; default 120), `--controls` (start with the H guide open), and independent `--music-volume`, `--ambience-volume`, and `--effects-volume` values in `[0,1]`. `--quiet` disables audio-device initialization for silent tests and captures.
+
+## Flatpak and release status
+
+- Flatpak manifest: [`org.helloneighbor.HelloNeighbor.yml`](org.helloneighbor.HelloNeighbor.yml)
+- AppStream metadata: [`org.helloneighbor.HelloNeighbor.metainfo.xml`](org.helloneighbor.HelloNeighbor.metainfo.xml)
+- Build, install, packaged self-test, and 120-frame windowed smoke validation all passed; details are in [PERFORMANCE.md](docs/PERFORMANCE.md).
+- Bundle file: `org.helloneighbor.HelloNeighbor.flatpak` (generated locally; do not commit the binary—attach it to a GitHub Release).
+
+## License and attribution
+
+Hello Neighbor and its characters belong to their respective owners. This is an unofficial fan prototype, not affiliated with or endorsed by Dynamic Pixels or tinyBuild. Procedural geometry and synthesized sounds are original to this prototype; original game assets are not included. Project licensing is MIT; metadata licensing for the app icon is CC0.

@@ -1,10 +1,10 @@
 [Desktop Entry]
 Type=Application
 Name=Hello Neighbor
-Comment=Stealth horror game remake in pure Rust & macroquad
+Comment=Explore an impossible house in a mysterious Bevy stealth sandbox
 Exec=hello-neighbor
 Icon=org.helloneighbor.HelloNeighbor
 Categories=Game;ActionGame;
 Terminal=false
 StartupNotify=true
-Keywords=game;stealth;horror;neighbor;rust;
+Keywords=game;stealth;horror;neighbor;rust;bevy;

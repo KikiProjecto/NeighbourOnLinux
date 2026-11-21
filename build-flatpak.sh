@@ -20,8 +20,8 @@ if ! command -v flatpak-builder >/dev/null 2>&1; then
 fi
 
 # Ensure icon exists
-if [ ! -f "reference/icon.svg" ]; then
-    echo "Error: reference/icon.svg not found."
+if [ ! -f "packaging/icon.svg" ]; then
+    echo "Error: packaging/icon.svg not found."
     exit 1
 fi
 
@@ -31,8 +31,13 @@ if [ "${1:-}" = "--clean" ]; then
     rm -rf "$BUILD_DIR" "$REPO_DIR" "$BUNDLE_FILE"
 fi
 
+# Resolve network dependencies on the host; the sandbox build is deliberately offline.
+command -v cargo >/dev/null 2>&1 || { echo "Error: Rust/Cargo is required."; exit 1; }
+echo "Vendoring locked Rust dependencies..."
+cargo vendor --manifest-path app/Cargo.toml --locked --versioned-dirs .flatpak-vendor > .flatpak-cargo-config.toml
+
 echo "Building flatpak package into $BUILD_DIR..."
-flatpak-builder --user --force-clean \
+flatpak-builder --user --force-clean --disable-rofiles-fuse \
     --repo="$REPO_DIR" \
     "$BUILD_DIR" \
     "${APP_ID}.yml"

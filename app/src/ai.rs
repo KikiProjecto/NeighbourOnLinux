@@ -1,204 +1,290 @@
-use macroquad::prelude::*;
+//! A finite-state neighbor with occluded sight, hearing and graph-based navigation.
+use crate::{
+    player::Player,
+    world::{HousePlan, NEIGHBOR_SPAWN, line_of_sight},
+};
+use bevy::prelude::*;
 
-use crate::world::{line_of_sight, Aabb};
-
-const DETECT_RANGE: f32 = 14.0;
-const PATROL_SPEED: f32 = 1.9;
-const CHASE_SPEED: f32 = 3.4;
-const INVESTIGATE_SPEED: f32 = 2.4;
-const SUSPICION_TO_CHASE: f32 = 0.8;
-const LOST_SIGHT_TO_SUSPICIOUS: f32 = 2.5;
-const LOST_SIGHT_TO_PATROL: f32 = 3.5;
-const CATCH_RADIUS: f32 = 1.3;
-const NEIGHBOR_HALF_WIDTH: f32 = 0.38;
-const NEIGHBOR_HEIGHT: f32 = 1.9;
-const STEP_HEIGHT: f32 = 0.45;
-
-#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
 pub enum AlertState {
+    #[default]
     Patrol,
-    Suspicious,
+    Investigate,
     Chase,
+    Search,
 }
-
+impl AlertState {
+    pub fn label(self) -> &'static str {
+        match self {
+            Self::Patrol => "PATROLLING",
+            Self::Investigate => "HEARD SOMETHING",
+            Self::Chase => "HE SPOTTED YOU",
+            Self::Search => "SEARCHING",
+        }
+    }
+}
+#[derive(Component)]
 pub struct Neighbor {
-    pub pos: Vec3,
+    pub body: Player,
     pub state: AlertState,
-    pub last_seen_pos: Option<Vec3>,
-    pub investigate_pos: Option<Vec3>,
-    waypoints: Vec<Vec3>,
-    waypoint_index: usize,
-    suspicion_timer: f32,
-    lost_timer: f32,
+    pub awareness: f32,
+    pub facing: Vec3,
+    pub target: Vec3,
+    pub walking: bool,
+    pub last_capture: Option<Vec3>,
+    route: Vec<Vec3>,
+    waypoint: usize,
+    patrol_index: usize,
+    repath_in: f32,
+    lost_for: f32,
+    search_for: f32,
+}
+impl Default for Neighbor {
+    fn default() -> Self {
+        Self {
+            body: Player::new(NEIGHBOR_SPAWN),
+            state: AlertState::Patrol,
+            awareness: 0.,
+            facing: Vec3::Z,
+            target: NEIGHBOR_SPAWN,
+            walking: false,
+            last_capture: None,
+            route: vec![],
+            waypoint: 0,
+            patrol_index: 0,
+            repath_in: 0.,
+            lost_for: 0.,
+            search_for: 0.,
+        }
+    }
+}
+impl Neighbor {
+    pub fn hear(&mut self, pos: Vec3, loudness: f32, colliders: &[crate::world::Aabb]) {
+        if self.state == AlertState::Chase
+            || self.body.pos.distance_squared(pos) >= loudness * loudness
+        {
+            return;
+        }
+        let wall_factor = if line_of_sight(self.body.eye(), pos + Vec3::Y, colliders) {
+            1.
+        } else {
+            0.45
+        };
+        if self.state != AlertState::Chase && self.body.pos.distance(pos) < loudness * wall_factor {
+            self.state = AlertState::Investigate;
+            self.target = pos;
+            self.search_for = 7.;
+            self.repath_in = 0.;
+            self.awareness = self.awareness.max(0.2);
+        }
+    }
+    pub fn tick(
+        &mut self,
+        dt: f32,
+        player: &Player,
+        plan: &HousePlan,
+        colliders: &[crate::world::Aabb],
+    ) -> bool {
+        let delta = player.eye() - self.body.eye();
+        let distance = delta.length();
+        let on_property = player.pos.z < 17.0;
+        let in_cone = distance < 2.2 || delta.normalize_or_zero().dot(self.facing) > 0.35;
+        let range = if player.crouching { 10.0 } else { 18.0 };
+        let visible = on_property
+            && distance < range
+            && in_cone
+            && line_of_sight(self.body.eye(), player.eye(), colliders);
+        if visible {
+            self.awareness =
+                (self.awareness + dt * if player.crouching { 0.5 } else { 1.15 }).min(1.);
+            self.target = player.pos;
+            self.lost_for = 0.;
+            self.search_for = 7.;
+            if self.awareness >= 0.95 || distance < 3. {
+                if self.state != AlertState::Chase {
+                    self.repath_in = 0.;
+                }
+                self.state = AlertState::Chase;
+            } else {
+                self.state = AlertState::Investigate;
+            }
+        } else {
+            self.awareness = (self.awareness - dt * 0.13).max(0.);
+            self.lost_for += dt;
+            if self.state == AlertState::Chase && self.lost_for > 2.4 {
+                self.state = AlertState::Search;
+                self.search_for = 7.;
+            }
+            if matches!(self.state, AlertState::Search | AlertState::Investigate) {
+                self.search_for -= dt;
+                if self.search_for <= 0. {
+                    self.state = AlertState::Patrol;
+                    self.repath_in = 0.;
+                }
+            }
+        }
+        if self.state == AlertState::Patrol
+            && let Some(&id) = plan
+                .patrol
+                .get(self.patrol_index % plan.patrol.len().max(1))
+        {
+            self.target = if self.patrol_index.is_multiple_of(3) {
+                self.last_capture.unwrap_or(plan.navigation[id].pos)
+            } else {
+                plan.navigation[id].pos
+            };
+            if flat_distance(self.body.pos, self.target) < 0.7
+                && (self.body.pos.y - self.target.y).abs() < 0.7
+            {
+                self.patrol_index += 1;
+                self.repath_in = 0.;
+            }
+        }
+        self.repath_in -= dt;
+        let direct = (self.target.y - self.body.pos.y).abs() < 0.45
+            && clear_body_route(&self.body, self.target, colliders);
+        if !direct && self.repath_in <= 0. {
+            self.route = plan.route(self.body.pos, self.target);
+            // Replanning midway through a long corridor must not send the
+            // neighbor back to the node he just left every 0.9 seconds.
+            self.waypoint = usize::from(self.route.get(1).is_some_and(|&next| {
+                (next.y - self.body.pos.y).abs() < 0.5
+                    && clear_body_route(&self.body, next, colliders)
+            }));
+            self.repath_in = 0.9;
+        }
+        let target = if direct {
+            self.target
+        } else {
+            while self.waypoint < self.route.len()
+                && flat_distance(self.body.pos, self.route[self.waypoint]) < 0.5
+                && (self.body.pos.y - self.route[self.waypoint].y).abs() < 0.5
+            {
+                self.waypoint += 1;
+            }
+            self.route
+                .get(self.waypoint)
+                .copied()
+                .unwrap_or(self.body.pos)
+        };
+        let to = Vec3::new(target.x - self.body.pos.x, 0., target.z - self.body.pos.z);
+        self.walking = to.length() > 0.18;
+        if self.walking {
+            self.facing = to.normalize();
+            let speed = match self.state {
+                AlertState::Patrol => 1.7,
+                AlertState::Investigate | AlertState::Search => 2.2,
+                AlertState::Chase => 5.3,
+            };
+            let movement = self.facing * (speed * dt).min(to.length());
+            self.body.vel.y = (self.body.vel.y - 20. * dt).max(-25.);
+            self.body
+                .translate(movement + Vec3::Y * self.body.vel.y * dt, colliders, 0.26);
+            if self.body.on_ground {
+                self.body.vel.y = 0.;
+            }
+        } else {
+            self.body.vel.y = (self.body.vel.y - 20. * dt).max(-25.);
+            self.body
+                .translate(Vec3::Y * self.body.vel.y * dt, colliders, 0.26);
+            if self.body.on_ground {
+                self.body.vel.y = 0.;
+            }
+        }
+        on_property && visible && distance < 1.35
+    }
+    pub fn reset(&mut self, last_capture: Option<Vec3>) {
+        *self = Self {
+            last_capture,
+            ..Self::default()
+        };
+    }
+}
+fn flat_distance(a: Vec3, b: Vec3) -> f32 {
+    Vec2::new(a.x - b.x, a.z - b.z).length()
+}
+// Seeing a destination around a corner does not mean a full-width body fits.
+// Use an expanded obstacle segment for movement, keeping optical LOS for sight.
+fn clear_body_route(body: &Player, target: Vec3, colliders: &[crate::world::Aabb]) -> bool {
+    !colliders.iter().any(|bounds| {
+        if bounds.max.y <= body.pos.y + 0.26 || bounds.min.y >= body.pos.y + body.height() {
+            return false;
+        }
+        let margin = crate::player::PLAYER_HALF_WIDTH + 0.06;
+        let expanded = crate::world::Aabb {
+            min: Vec3::new(bounds.min.x - margin, -1000., bounds.min.z - margin),
+            max: Vec3::new(bounds.max.x + margin, 1000., bounds.max.z + margin),
+        };
+        crate::world::segment_hit(body.pos, target, &expanded).is_some()
+    })
 }
 
-impl Neighbor {
-    pub fn new(pos: Vec3, waypoints: Vec<Vec3>) -> Self {
-        Self {
-            pos,
-            state: AlertState::Patrol,
-            last_seen_pos: None,
-            investigate_pos: None,
-            waypoints,
-            waypoint_index: 0,
-            suspicion_timer: 0.0,
-            lost_timer: 0.0,
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::world::Aabb;
+    #[test]
+    fn detects_in_front_but_not_through_walls_or_across_safe_street() {
+        let plan = HousePlan::default();
+        let mut n = Neighbor::default();
+        n.body.pos = Vec3::ZERO;
+        let p = Player::new(Vec3::new(0., 0., 4.));
+        let floor = Aabb::from_center(Vec3::new(0., -0.25, 0.), Vec3::new(40., 0.5, 40.));
+        for _ in 0..60 {
+            n.tick(1. / 60., &p, &plan, &[floor]);
         }
-    }
-
-    pub fn aabb(&self) -> Aabb {
-        Aabb {
-            min: self.pos + vec3(-NEIGHBOR_HALF_WIDTH, 0.0, -NEIGHBOR_HALF_WIDTH),
-            max: self.pos + vec3(NEIGHBOR_HALF_WIDTH, NEIGHBOR_HEIGHT, NEIGHBOR_HALF_WIDTH),
+        assert_eq!(n.state, AlertState::Chase);
+        let mut n = Neighbor::default();
+        n.body.pos = Vec3::ZERO;
+        let walls = [Aabb::from_center(
+            Vec3::new(0., 1., 2.),
+            Vec3::new(8., 4., 0.5),
+        )];
+        for _ in 0..10 {
+            n.tick(1. / 60., &p, &plan, &walls);
         }
+        assert_eq!(n.awareness, 0.);
+        let p = Player::new(Vec3::new(0., 0., 24.));
+        assert!(!n.tick(1. / 60., &p, &plan, &[]));
     }
-
-    pub fn hear_noise(&mut self, noise_pos: Vec3) {
-        if self.state == AlertState::Patrol || self.state == AlertState::Suspicious {
-            self.investigate_pos = Some(noise_pos);
-            self.state = AlertState::Suspicious;
-            self.suspicion_timer = 0.5;
-            self.lost_timer = 0.0;
-        }
+    #[test]
+    fn noise_changes_patrol_to_investigation() {
+        let mut n = Neighbor::default();
+        let pos = n.body.pos + Vec3::X * 3.;
+        n.hear(pos, 10., &[]);
+        assert_eq!(n.state, AlertState::Investigate);
+        assert_eq!(n.target, pos);
     }
-
-    pub fn update(&mut self, dt: f32, player_pos: Vec3, colliders: &[Aabb]) -> bool {
-        let distance = (player_pos - self.pos).length();
-        let visible = distance <= DETECT_RANGE
-            && line_of_sight(
-                self.pos + vec3(0.0, 1.5, 0.0),
-                player_pos + vec3(0.0, 1.4, 0.0),
-                colliders,
+    #[test]
+    fn neighbor_can_follow_the_stairs_and_navigate_to_a_distant_underground_room() {
+        let plan = HousePlan::default();
+        let mut neighbor = Neighbor::default();
+        neighbor.body.pos = Vec3::new(-8., crate::world::FLOOR_Y, -4.4);
+        let player = Player::new(crate::world::PLAYER_SPAWN);
+        for destination in [
+            crate::basement::cell_center(5, 5),
+            Vec3::new(-8., crate::world::FLOOR_Y, -4.4),
+            crate::basement::cell_center(0, 0),
+        ] {
+            neighbor.state = AlertState::Investigate;
+            neighbor.target = destination;
+            neighbor.search_for = 1000.;
+            neighbor.repath_in = 0.;
+            let mut arrived = false;
+            for _ in 0..12000 {
+                neighbor.tick(1. / 60., &player, &plan, &plan.colliders);
+                if flat_distance(neighbor.body.pos, destination) < 0.6
+                    && (neighbor.body.pos.y - destination.y).abs() < 0.6
+                {
+                    arrived = true;
+                    break;
+                }
+            }
+            assert!(
+                arrived,
+                "neighbor stuck at {:?}, heading to {destination:?}",
+                neighbor.body.pos
             );
-
-        if visible {
-            self.last_seen_pos = Some(player_pos);
-        }
-
-        match self.state {
-            AlertState::Patrol => {
-                if visible {
-                    if distance < 5.0 {
-                        self.state = AlertState::Chase;
-                    } else {
-                        self.state = AlertState::Suspicious;
-                        self.suspicion_timer = 0.0;
-                        self.lost_timer = 0.0;
-                    }
-                } else {
-                    self.patrol(dt, colliders);
-                }
-            }
-            AlertState::Suspicious => {
-                if visible {
-                    self.suspicion_timer += dt;
-                    self.lost_timer = 0.0;
-                    if self.suspicion_timer >= SUSPICION_TO_CHASE || distance < 3.2 {
-                        self.state = AlertState::Chase;
-                    } else {
-                        self.move_towards(player_pos, dt, INVESTIGATE_SPEED, colliders);
-                    }
-                } else if let Some(target) = self.investigate_pos {
-                    let d = (vec3(target.x, 0.0, target.z) - vec3(self.pos.x, 0.0, self.pos.z)).length();
-                    if d < 0.8 {
-                        self.investigate_pos = None;
-                    } else {
-                        self.move_towards(target, dt, INVESTIGATE_SPEED, colliders);
-                    }
-                    self.lost_timer += dt;
-                    if self.lost_timer >= LOST_SIGHT_TO_PATROL {
-                        self.state = AlertState::Patrol;
-                        self.investigate_pos = None;
-                        self.lost_timer = 0.0;
-                    }
-                } else {
-                    self.lost_timer += dt;
-                    if self.lost_timer >= LOST_SIGHT_TO_PATROL {
-                        self.state = AlertState::Patrol;
-                        self.lost_timer = 0.0;
-                    }
-                }
-            }
-            AlertState::Chase => {
-                if visible {
-                    self.lost_timer = 0.0;
-                    self.move_towards(player_pos, dt, CHASE_SPEED, colliders);
-                } else {
-                    self.lost_timer += dt;
-                    if let Some(last_pos) = self.last_seen_pos {
-                        let d = (vec3(last_pos.x, 0.0, last_pos.z) - vec3(self.pos.x, 0.0, self.pos.z)).length();
-                        if d < 0.8 || self.lost_timer >= LOST_SIGHT_TO_SUSPICIOUS {
-                            self.state = AlertState::Suspicious;
-                            self.investigate_pos = Some(last_pos);
-                            self.last_seen_pos = None;
-                            self.suspicion_timer = 0.0;
-                        } else {
-                            self.move_towards(last_pos, dt, CHASE_SPEED, colliders);
-                        }
-                    } else if self.lost_timer >= LOST_SIGHT_TO_SUSPICIOUS {
-                        self.state = AlertState::Suspicious;
-                        self.suspicion_timer = 0.0;
-                    }
-                }
-            }
-        }
-
-        (visible && distance < CATCH_RADIUS) || distance < 0.85
-    }
-
-    fn patrol(&mut self, dt: f32, colliders: &[Aabb]) {
-        if self.waypoints.is_empty() {
-            return;
-        }
-        let target = self.waypoints[self.waypoint_index];
-        if (vec3(target.x, 0.0, target.z) - vec3(self.pos.x, 0.0, self.pos.z)).length() < 0.6 {
-            self.waypoint_index = (self.waypoint_index + 1) % self.waypoints.len();
-            return;
-        }
-        self.move_towards(target, dt, PATROL_SPEED, colliders);
-    }
-
-    pub fn move_towards(&mut self, target: Vec3, dt: f32, speed: f32, colliders: &[Aabb]) {
-        let flat = vec3(target.x - self.pos.x, 0.0, target.z - self.pos.z);
-        if flat.length_squared() < 1e-4 {
-            return;
-        }
-        let delta = flat.normalize() * speed * dt;
-        let substeps = ((delta.length() / 0.15).ceil() as usize).max(1);
-        let s_delta = delta / substeps as f32;
-
-        for _ in 0..substeps {
-            self.pos.x += s_delta.x;
-            self.resolve_axis(0, s_delta.x, colliders);
-            self.pos.z += s_delta.z;
-            self.resolve_axis(2, s_delta.z, colliders);
-        }
-    }
-
-    fn resolve_axis(&mut self, axis: usize, amount: f32, colliders: &[Aabb]) {
-        if amount == 0.0 {
-            return;
-        }
-        for collider in colliders {
-            if !self.aabb().overlaps(collider) {
-                continue;
-            }
-            let rise = collider.max.y - self.pos.y;
-            if rise > 0.0 && rise <= STEP_HEIGHT && self.pos.y + NEIGHBOR_HEIGHT > collider.max.y {
-                self.pos.y = collider.max.y;
-                continue;
-            }
-            if axis == 0 {
-                if amount > 0.0 {
-                    self.pos.x = collider.min.x - NEIGHBOR_HALF_WIDTH - 0.001;
-                } else {
-                    self.pos.x = collider.max.x + NEIGHBOR_HALF_WIDTH + 0.001;
-                }
-            } else if amount > 0.0 {
-                self.pos.z = collider.min.z - NEIGHBOR_HALF_WIDTH - 0.001;
-            } else {
-                self.pos.z = collider.max.z + NEIGHBOR_HALF_WIDTH + 0.001;
-            }
         }
     }
 }

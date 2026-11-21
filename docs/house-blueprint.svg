@@ -1,0 +1,313 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="1010" viewBox="0 0 1120 1010">
+<rect width="1120" height="1010" fill="#111d29"/>
+<style>text{font-family:DejaVu Sans,Arial,sans-serif;fill:#dedacb}.small{font-size:11px;fill:#95a7ad}.label{font-size:11px}.title{font-size:16px;font-weight:bold}.room{fill:#223947;stroke:#4d6a75;stroke-width:1}.wall{fill:none;stroke:#afaa91;stroke-width:3}</style>
+<text x="32" y="38" class="title">THE IMPOSSIBLE HOUSE</text>
+<text x="32" y="62" class="small">House concept / authored Bevy blockout • six main levels + tower gallery</text>
+<text x="32" y="82" class="small">Plan views: back of house at top; street at bottom. Exact furniture and final art remain iterative.</text>
+<rect x="32" y="115" width="336" height="280" fill="#192a36" stroke="#304653"/>
+<text x="48" y="142" class="title">01 / THE ORDINARY LIE</text>
+<text x="48" y="162" class="small">Living room, kitchen, sealed basement</text>
+<rect x="54" y="180" width="108" height="45" class="room"/>
+<text x="60" y="197" class="label">KITCHEN / FREEZER</text>
+<rect x="54" y="225" width="72" height="36" class="room"/>
+<text x="60" y="242" class="label">BASEMENT GATE</text>
+<rect x="54" y="270" width="108" height="72" class="room"/>
+<text x="60" y="287" class="label">LIVING / PHONE</text>
+<rect x="206.1" y="214.2" width="55.800000000000004" height="97.2" fill="#3e403a" stroke="#988b67"/>
+<path d="M 210.5 212.76 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 210.5 218.16 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 210.5 223.56 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 210.5 228.95999999999998 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 210.5 234.35999999999999 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 210.5 239.76 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 210.5 245.16 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 210.5 250.56 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 210.5 255.95999999999998 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 210.5 261.36 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 210.5 266.76 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 210.5 272.15999999999997 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 210.5 277.56 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 210.5 282.96 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 210.5 288.36 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 210.5 293.76 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 210.5 299.15999999999997 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 210.5 304.56 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 238.4 212.76 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 238.4 218.16 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 238.4 223.56 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 238.4 228.95999999999998 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 238.4 234.35999999999999 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 238.4 239.76 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 238.4 245.16 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 238.4 250.56 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 238.4 255.95999999999998 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 238.4 261.36 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 238.4 266.76 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 238.4 272.15999999999997 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 238.4 277.56 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 238.4 282.96 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 238.4 288.36 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 238.4 293.76 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 238.4 299.15999999999997 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 238.4 304.56 h 20" stroke="#8a8169" stroke-width=".7"/>
+<rect x="54" y="180" width="216" height="162" class="wall"/>
+<text x="48" y="375" class="small" style="fill:#d0a36b">Blue key + basement return</text>
+<circle cx="118.35000000000001" cy="319.95000000000005" r="6" fill="#7cb9df"/>
+<text x="128.35000000000002" y="323.95000000000005" class="small" style="fill:#7cb9df">BLUE</text>
+<rect x="397" y="115" width="336" height="280" fill="#192a36" stroke="#304653"/>
+<text x="413" y="142" class="title">02 / DOMESTIC REMAINS</text>
+<text x="413" y="162" class="small">Workshop, bedroom, bathroom</text>
+<rect x="419" y="180" width="81" height="63" class="room"/>
+<text x="425" y="197" class="label">WORKSHOP</text>
+<rect x="509" y="180" width="54" height="45" class="room"/>
+<text x="515" y="197" class="label">BATH</text>
+<rect x="419" y="261" width="81" height="81" class="room"/>
+<text x="425" y="278" class="label">BEDROOM</text>
+<rect x="571.1" y="214.2" width="55.800000000000004" height="97.2" fill="#3e403a" stroke="#988b67"/>
+<path d="M 575.5 212.76 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 575.5 218.16 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 575.5 223.56 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 575.5 228.95999999999998 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 575.5 234.35999999999999 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 575.5 239.76 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 575.5 245.16 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 575.5 250.56 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 575.5 255.95999999999998 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 575.5 261.36 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 575.5 266.76 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 575.5 272.15999999999997 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 575.5 277.56 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 575.5 282.96 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 575.5 288.36 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 575.5 293.76 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 575.5 299.15999999999997 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 575.5 304.56 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 603.4 212.76 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 603.4 218.16 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 603.4 223.56 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 603.4 228.95999999999998 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 603.4 234.35999999999999 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 603.4 239.76 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 603.4 245.16 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 603.4 250.56 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 603.4 255.95999999999998 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 603.4 261.36 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 603.4 266.76 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 603.4 272.15999999999997 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 603.4 277.56 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 603.4 282.96 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 603.4 288.36 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 603.4 293.76 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 603.4 299.15999999999997 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 603.4 304.56 h 20" stroke="#8a8169" stroke-width=".7"/>
+<rect x="419" y="180" width="216" height="162" class="wall"/>
+<text x="413" y="375" class="small" style="fill:#d0a36b">Crowbar and domestic clues</text>
+<circle cx="455" cy="207.9" r="6" fill="#d48e6f"/>
+<text x="465" y="211.9" class="small" style="fill:#d48e6f">CROWBAR</text>
+<rect x="762" y="115" width="336" height="280" fill="#192a36" stroke="#304653"/>
+<text x="778" y="142" class="title">03 / THINGS LEFT BEHIND</text>
+<text x="778" y="162" class="small">Locked archive, gallery, child’s room</text>
+<rect x="784" y="180" width="63" height="49.5" class="room"/>
+<text x="790" y="197" class="label">ARCHIVE</text>
+<rect x="856" y="180" width="72" height="45" class="room"/>
+<text x="862" y="197" class="label">GALLERY</text>
+<rect x="784" y="270" width="81" height="72" class="room"/>
+<text x="790" y="287" class="label">CHILD’S ROOM</text>
+<rect x="936.1" y="214.2" width="55.800000000000004" height="97.2" fill="#3e403a" stroke="#988b67"/>
+<path d="M 940.5 212.76 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 940.5 218.16 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 940.5 223.56 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 940.5 228.95999999999998 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 940.5 234.35999999999999 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 940.5 239.76 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 940.5 245.16 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 940.5 250.56 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 940.5 255.95999999999998 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 940.5 261.36 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 940.5 266.76 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 940.5 272.15999999999997 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 940.5 277.56 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 940.5 282.96 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 940.5 288.36 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 940.5 293.76 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 940.5 299.15999999999997 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 940.5 304.56 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 968.4 212.76 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 968.4 218.16 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 968.4 223.56 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 968.4 228.95999999999998 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 968.4 234.35999999999999 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 968.4 239.76 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 968.4 245.16 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 968.4 250.56 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 968.4 255.95999999999998 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 968.4 261.36 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 968.4 266.76 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 968.4 272.15999999999997 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 968.4 277.56 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 968.4 282.96 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 968.4 288.36 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 968.4 293.76 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 968.4 299.15999999999997 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 968.4 304.56 h 20" stroke="#8a8169" stroke-width=".7"/>
+<rect x="784" y="180" width="216" height="162" class="wall"/>
+<text x="778" y="375" class="small" style="fill:#d0a36b">Blue lock → green key</text>
+<circle cx="820" cy="203.4" r="6" fill="#9ebc8a"/>
+<text x="830" y="207.4" class="small" style="fill:#9ebc8a">GREEN</text>
+<rect x="32" y="417" width="336" height="280" fill="#192a36" stroke="#304653"/>
+<text x="48" y="444" class="title">04 / THE HOUSE MOVES</text>
+<text x="48" y="464" class="small">Rail station, elevated tracks, control desk</text>
+<rect x="54" y="482" width="135" height="54" class="room"/>
+<text x="60" y="499" class="label">SERVICE GALLERY</text>
+<rect x="54" y="545" width="90" height="99" class="room"/>
+<text x="60" y="562" class="label">TROLLEY CONTROL</text>
+<rect x="206.1" y="516.2" width="55.800000000000004" height="97.2" fill="#3e403a" stroke="#988b67"/>
+<path d="M 210.5 514.76 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 210.5 520.16 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 210.5 525.56 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 210.5 530.96 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 210.5 536.36 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 210.5 541.76 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 210.5 547.16 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 210.5 552.56 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 210.5 557.96 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 210.5 563.36 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 210.5 568.76 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 210.5 574.16 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 210.5 579.56 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 210.5 584.96 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 210.5 590.36 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 210.5 595.76 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 210.5 601.16 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 210.5 606.56 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 238.4 514.76 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 238.4 520.16 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 238.4 525.56 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 238.4 530.96 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 238.4 536.36 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 238.4 541.76 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 238.4 547.16 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 238.4 552.56 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 238.4 557.96 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 238.4 563.36 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 238.4 568.76 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 238.4 574.16 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 238.4 579.56 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 238.4 584.96 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 238.4 590.36 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 238.4 595.76 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 238.4 601.16 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 238.4 606.56 h 20" stroke="#8a8169" stroke-width=".7"/>
+<rect x="54" y="482" width="216" height="162" class="wall"/>
+<text x="48" y="677" class="small" style="fill:#d0a36b">Start / stop trolley</text>
+<rect x="45" y="473" width="234" height="180" fill="none" stroke="#ba805e" stroke-width="2" stroke-dasharray="5 3"/>
+<rect x="397" y="417" width="336" height="280" fill="#192a36" stroke="#304653"/>
+<text x="413" y="444" class="title">05 / SOMETHING GROWING</text>
+<text x="413" y="464" class="small">Locked greenhouse, generator, giant coil</text>
+<rect x="419" y="482" width="63" height="49.5" class="room"/>
+<text x="425" y="499" class="label">GREEN</text>
+<rect x="482" y="482" width="81" height="54" class="room"/>
+<text x="488" y="499" class="label">COIL</text>
+<rect x="419" y="572" width="144" height="72" class="room"/>
+<text x="425" y="589" class="label">INTERIOR GARDEN</text>
+<rect x="571.1" y="516.2" width="55.800000000000004" height="97.2" fill="#3e403a" stroke="#988b67"/>
+<path d="M 575.5 514.76 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 575.5 520.16 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 575.5 525.56 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 575.5 530.96 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 575.5 536.36 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 575.5 541.76 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 575.5 547.16 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 575.5 552.56 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 575.5 557.96 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 575.5 563.36 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 575.5 568.76 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 575.5 574.16 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 575.5 579.56 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 575.5 584.96 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 575.5 590.36 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 575.5 595.76 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 575.5 601.16 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 575.5 606.56 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 603.4 514.76 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 603.4 520.16 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 603.4 525.56 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 603.4 530.96 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 603.4 536.36 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 603.4 541.76 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 603.4 547.16 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 603.4 552.56 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 603.4 557.96 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 603.4 563.36 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 603.4 568.76 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 603.4 574.16 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 603.4 579.56 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 603.4 584.96 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 603.4 590.36 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 603.4 595.76 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 603.4 601.16 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 603.4 606.56 h 20" stroke="#8a8169" stroke-width=".7"/>
+<rect x="419" y="482" width="216" height="162" class="wall"/>
+<text x="413" y="677" class="small" style="fill:#d0a36b">Green lock → red key</text>
+<circle cx="433.4" cy="494.6" r="6" fill="#d48e6f"/>
+<text x="443.4" y="498.6" class="small" style="fill:#d48e6f">RED</text>
+<rect x="762" y="417" width="336" height="280" fill="#192a36" stroke="#304653"/>
+<text x="778" y="444" class="title">06 / ABOVE THE ROOFS</text>
+<text x="778" y="464" class="small">Rooftop trees, tower door, windmill mast</text>
+<rect x="784" y="482" width="90" height="162" class="room"/>
+<text x="790" y="499" class="label">ROOF GARDEN</text>
+<rect x="887.5" y="500" width="45" height="36" class="room"/>
+<text x="893.5" y="517" class="label">TOWER</text>
+<rect x="937" y="482" width="63" height="162" class="room"/>
+<text x="943" y="499" class="label">ROOF / AERIALS</text>
+<rect x="936.1" y="516.2" width="55.800000000000004" height="97.2" fill="#3e403a" stroke="#988b67"/>
+<path d="M 940.5 514.76 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 940.5 520.16 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 940.5 525.56 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 940.5 530.96 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 940.5 536.36 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 940.5 541.76 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 940.5 547.16 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 940.5 552.56 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 940.5 557.96 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 940.5 563.36 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 940.5 568.76 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 940.5 574.16 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 940.5 579.56 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 940.5 584.96 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 940.5 590.36 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 940.5 595.76 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 940.5 601.16 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 940.5 606.56 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 968.4 514.76 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 968.4 520.16 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 968.4 525.56 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 968.4 530.96 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 968.4 536.36 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 968.4 541.76 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 968.4 547.16 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 968.4 552.56 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 968.4 557.96 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 968.4 563.36 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 968.4 568.76 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 968.4 574.16 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 968.4 579.56 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 968.4 584.96 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 968.4 590.36 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 968.4 595.76 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 968.4 601.16 h 20" stroke="#8a8169" stroke-width=".7"/>
+<path d="M 968.4 606.56 h 20" stroke="#8a8169" stroke-width=".7"/>
+<rect x="784" y="482" width="216" height="162" class="wall"/>
+<text x="778" y="677" class="small" style="fill:#d0a36b">Red lock → upper gallery</text>
+<circle cx="910" cy="536" r="6" fill="#d48e6f"/>
+<text x="920" y="540" class="small" style="fill:#d48e6f">RED LOCK</text>
+<rect x="32" y="735" width="1066" height="176" fill="#1b303a" stroke="#385461"/>
+<text x="50" y="764" class="title">THE VERY TOP / LISTENING &amp; DYNAMO GALLERY</text>
+<text x="50" y="791" class="label">Red tower door → yellow ladder → windmill control cabinet</text>
+<text x="50" y="813" class="small">Stopping the exterior rotor permits the greenhouse generator to be switched off.</text>
+<text x="50" y="834" class="small">Power loss makes the freezer keycard available. The crowbar removes the basement boards.</text>
+<text x="50" y="862" class="small" style="fill:#b8c9a8">Working: colored locks, ladder interaction, windmill, generator, freezer and basement gate.</text>
+<text x="50" y="883" class="small">Designed / exterior blockout: hanging fear shed, water tank circuit, annex shortcuts and fear spaces.</text>
+<text x="32" y="945" class="title">MORNING → AFTERNOON → EVENING → NIGHT → NEXT DAY</text>
+<text x="32" y="970" class="small">Mystery is carried by architecture, clues, subdued materials and sound—not a permanently dark sky.</text>
+</svg>

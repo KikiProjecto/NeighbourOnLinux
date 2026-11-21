@@ -2,6 +2,8 @@ app-id: org.helloneighbor.HelloNeighbor
 runtime: org.freedesktop.Platform
 runtime-version: '26.08'
 sdk: org.freedesktop.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.rust-stable
 command: hello-neighbor
 
 finish-args:
@@ -15,14 +17,54 @@ modules:
   - name: hello-neighbor
     buildsystem: simple
     build-commands:
-      - cargo build --release --manifest-path app/Cargo.toml
+      - install -Dm644 .flatpak-cargo-config.toml .cargo/config.toml
+      - cargo build --release --frozen --manifest-path app/Cargo.toml
       - install -Dm755 app/target/release/hello-neighbor /app/bin/hello-neighbor
-      - install -Dm644 reference/icon.svg /app/share/icons/hicolor/scalable/apps/org.helloneighbor.HelloNeighbor.svg
+      - install -Dm644 packaging/icon.svg /app/share/icons/hicolor/scalable/apps/org.helloneighbor.HelloNeighbor.svg
       - install -Dm644 org.helloneighbor.HelloNeighbor.desktop /app/share/applications/org.helloneighbor.HelloNeighbor.desktop
       - install -Dm644 org.helloneighbor.HelloNeighbor.metainfo.xml /app/share/metainfo/org.helloneighbor.HelloNeighbor.metainfo.xml
     build-options:
+      append-path: /usr/lib/sdk/rust-stable/bin
       env:
         CARGO_HOME: /run/build/hello-neighbor/cargo
     sources:
       - type: dir
         path: .
+        skip:
+          - .git
+          - .git/**
+          - .flatpak-builder
+          - .flatpak-builder/**
+          - .flatpak-build
+          - .flatpak-build/**
+          - .flatpak-repo
+          - .flatpak-repo/**
+          - app/target
+          - app/target/**
+          - docs
+          - docs/**
+          - reference
+          - reference/**
+          - capture
+          - capture/**
+          - inbox
+          - inbox/**
+          - investigation.cany
+          - investigation.cany/**
+          - .playwright-mcp
+          - .playwright-mcp/**
+          - .code-review-graph
+          - .code-review-graph/**
+          - .env
+          - .env.*
+          - '*.log'
+          - '*.tmp'
+          - '*.bak'
+          - 'usage.json'
+          - 'transcript.json'
+          - 'craft.json*'
+          - 'feed.json'
+          - 'STATE.md'
+          - 'ROADMAP.md'
+          - 'CLAUDE.md'
+          - 'test_write.tmp'

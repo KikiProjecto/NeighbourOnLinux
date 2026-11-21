@@ -48,3 +48,8 @@ credentials*
 CLAUDE.md
 STATE.md
 ROADMAP.md
+
+# Generated dependency sources/config for offline Flatpak builds
+/.flatpak-vendor/
+/.flatpak-cargo-config.toml
+/.playwright-mcp/

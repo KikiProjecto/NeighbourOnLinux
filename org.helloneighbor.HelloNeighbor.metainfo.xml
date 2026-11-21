@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
   <id>org.helloneighbor.HelloNeighbor</id>
+  <url type="homepage">https://github.com/KikiProjecto/NeighbourOnLinux</url>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>MIT</project_license>
   <name>Hello Neighbor</name>
-  <summary>A stealth horror game remake in pure Rust and Macroquad</summary>
+  <summary>An unofficial stealth mystery prototype built with Bevy</summary>
   <description>
     <p>
-      A minimal, ultra-lightweight 3D first-person remake of Hello Neighbor written in pure Rust and Macroquad.
-      Sneak into your neighbor's house, locate the key, and escape without being caught.
+      Explore a large, strange house in an unofficial Rust and Bevy fan prototype.
+      Discover colored keys, unlock mystery doors, operate rooftop machinery and work toward the basement.
     </p>
     <p>Features:</p>
     <ul>
       <li>First-person movement with crouch, sprint, and jump mechanics</li>
       <li>Smart reactive AI with line-of-sight detection and suspicious states</li>
       <li>Distraction mechanics: throw objects to divert the neighbor</li>
-      <li>High-performance procedural 3D visuals running at under 15MB of RAM</li>
+      <li>A multi-level procedural house with a progressive day and night cycle</li>
     </ul>
   </description>
   <launchable type="desktop-id">org.helloneighbor.HelloNeighbor.desktop</launchable>
@@ -26,9 +27,9 @@
     <content_attribute id="violence-cartoon">mild</content_attribute>
   </content_rating>
   <releases>
-    <release version="0.1.0" date="2026-11-09">
+    <release version="0.2.0" date="2026-11-21">
       <description>
-        <p>Initial Flatpak release with full game loop and procedural sound effects.</p>
+        <p>Bevy rebuild with an expanded house, colored locks, rooftop machinery, synthesized audio and continuous time of day.</p>
       </description>
     </release>
   </releases>

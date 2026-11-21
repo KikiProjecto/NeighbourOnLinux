@@ -1,0 +1,7 @@
+phase,metric,samples,mean_ms,p50_ms,p95_ms,p99_ms,max_ms
+caught,frame_interval,797,16.6043,7.9756,53.3713,80.8163,528.4959
+caught,main_schedule,797,11.0098,5.2529,40.1016,58.8926,93.3346
+chase,frame_interval,165,16.9230,6.4412,54.6430,67.9256,132.8577
+chase,main_schedule,165,11.6298,4.2708,43.7810,53.3738,60.7955
+patrol,frame_interval,501,15.9649,5.8912,55.1731,88.3849,412.1730
+patrol,main_schedule,501,11.0387,3.7185,42.9674,66.4913,95.5698

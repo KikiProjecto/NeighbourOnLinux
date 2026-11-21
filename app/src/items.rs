@@ -1,122 +1,204 @@
-use macroquad::prelude::*;
+use crate::world::{FLOOR_Y, STOREY};
+use bevy::prelude::*;
 
-use crate::world::Aabb;
-
-pub struct Items {
-    pub key_taken: bool,
-    pub has_key: bool,
-    pub carrying: bool,
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum ItemKind {
+    Crowbar,
+    Umbrella,
+    Box,
+    BlueKey,
+    GreenKey,
+    RedKey,
 }
-
-impl Items {
-    pub fn new() -> Self {
-        Self {
-            key_taken: false,
-            has_key: false,
-            carrying: false,
+impl ItemKind {
+    pub fn label(self) -> &'static str {
+        match self {
+            Self::Crowbar => "Crowbar",
+            Self::Umbrella => "Umbrella",
+            Self::Box => "Box",
+            Self::BlueKey => "Blue key",
+            Self::GreenKey => "Green key",
+            Self::RedKey => "Red key",
         }
     }
 }
-
-pub struct PropBox {
-    pub pos: Vec3,
-    pub vel: Vec3,
-    pub is_flying: bool,
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum MysteryDoor {
+    Archive,
+    Greenhouse,
+    Tower,
 }
-
-impl PropBox {
-    pub fn new(pos: Vec3) -> Self {
-        Self {
-            pos,
-            vel: Vec3::ZERO,
-            is_flying: false,
+impl MysteryDoor {
+    pub const ALL: [Self; 3] = [Self::Archive, Self::Greenhouse, Self::Tower];
+    pub fn center(self) -> Vec3 {
+        match self {
+            Self::Archive => Vec3::new(-8., FLOOR_Y + STOREY * 2. + 1.3, -4.5),
+            Self::Greenhouse => Vec3::new(-8., FLOOR_Y + STOREY * 4. + 1.3, -4.5),
+            Self::Tower => Vec3::new(2., FLOOR_Y + STOREY * 5. + 1.3, -4.),
         }
     }
-
-    pub fn aabb(&self) -> Aabb {
-        Aabb::from_center(self.pos, vec3(0.6, 0.6, 0.6))
+    pub fn label(self) -> &'static str {
+        match self {
+            Self::Archive => "Blue archive",
+            Self::Greenhouse => "Green greenhouse",
+            Self::Tower => "Red tower",
+        }
     }
-
-    pub fn update(&mut self, dt: f32, colliders: &[Aabb]) -> bool {
-        if !self.is_flying {
-            return false;
+    pub fn is_open(self, p: &PuzzleProgress) -> bool {
+        match self {
+            Self::Archive => p.archive_open,
+            Self::Greenhouse => p.greenhouse_open,
+            Self::Tower => p.tower_open,
         }
-
-        let mut impact = false;
-        self.vel.y -= 18.0 * dt;
-
-        let substeps = 2;
-        let sdt = dt / substeps as f32;
-
-        for _ in 0..substeps {
-            self.pos.x += self.vel.x * sdt;
-            let mut box_aabb = self.aabb();
-            for collider in colliders {
-                if box_aabb.overlaps(collider) {
-                    if self.vel.x > 0.0 {
-                        self.pos.x = collider.min.x - 0.301;
-                    } else if self.vel.x < 0.0 {
-                        self.pos.x = collider.max.x + 0.301;
-                    }
-                    self.vel.x = -self.vel.x * 0.35;
-                    impact = true;
-                    break;
-                }
-            }
-
-            self.pos.z += self.vel.z * sdt;
-            box_aabb = self.aabb();
-            for collider in colliders {
-                if box_aabb.overlaps(collider) {
-                    if self.vel.z > 0.0 {
-                        self.pos.z = collider.min.z - 0.301;
-                    } else if self.vel.z < 0.0 {
-                        self.pos.z = collider.max.z + 0.301;
-                    }
-                    self.vel.z = -self.vel.z * 0.35;
-                    impact = true;
-                    break;
-                }
-            }
-
-            self.pos.y += self.vel.y * sdt;
-            box_aabb = self.aabb();
-            for collider in colliders {
-                if box_aabb.overlaps(collider) {
-                    if self.vel.y < 0.0 {
-                        self.pos.y = collider.max.y + 0.301;
-                        if self.vel.y.abs() > 1.2 {
-                            impact = true;
-                            self.vel.y = -self.vel.y * 0.25;
-                        } else {
-                            self.vel.y = 0.0;
-                        }
-                    } else if self.vel.y > 0.0 {
-                        self.pos.y = collider.min.y - 0.301;
-                        self.vel.y = 0.0;
-                        impact = true;
-                    }
-                    break;
-                }
-            }
+    }
+    pub fn unlock(
+        self,
+        p: &mut PuzzleProgress,
+        i: &Inventory,
+    ) -> Result<&'static str, &'static str> {
+        if self.is_open(p) {
+            return Ok("The door is already open.");
         }
-
-        if self.pos.y <= 0.3 {
-            self.pos.y = 0.3;
-            if self.vel.y.abs() > 1.2 {
-                impact = true;
+        match self {
+            Self::Archive if i.blue_key => {
+                p.archive_open = true;
+                Ok("The archive is open. A green key is hidden among the house records.")
             }
-            self.vel.y = 0.0;
+            Self::Greenhouse if i.green_key => {
+                p.greenhouse_open = true;
+                Ok("The greenhouse is open. Find the red key for the tower.")
+            }
+            Self::Tower if i.red_key => {
+                p.tower_open = true;
+                Ok("The tower is open. Climb the ladder to the windmill machinery.")
+            }
+            Self::Archive => {
+                Err("You need the blue key. Check the telephone table in the living room.")
+            }
+            Self::Greenhouse => Err("You need the green key from the archive on floor 3."),
+            Self::Tower => Err("You need the red key from the greenhouse on floor 5."),
         }
-
-        self.vel.x *= 0.98;
-        self.vel.z *= 0.98;
-
-        if self.vel.length_squared() < 0.1 && (self.pos.y - 0.3).abs() < 0.05 {
-            self.vel = Vec3::ZERO;
-            self.is_flying = false;
+    }
+}
+#[derive(Component)]
+pub struct Pickup {
+    pub kind: ItemKind,
+    pub home: Vec3,
+    pub velocity: Vec3,
+    pub held: bool,
+}
+#[derive(Resource, Default)]
+pub struct Inventory {
+    pub crowbar: bool,
+    pub keycard: bool,
+    pub umbrella: bool,
+    pub blue_key: bool,
+    pub green_key: bool,
+    pub red_key: bool,
+    pub carrying: Option<Entity>,
+}
+#[derive(Resource, Default, Debug)]
+pub struct PuzzleProgress {
+    pub archive_open: bool,
+    pub greenhouse_open: bool,
+    pub tower_open: bool,
+    pub windmill_stopped: bool,
+    pub power_off: bool,
+    pub train_running: bool,
+    pub boards_removed: bool,
+    pub basement_open: bool,
+}
+impl PuzzleProgress {
+    pub fn objective(&self, i: &Inventory) -> &'static str {
+        if self.basement_open {
+            "The secret beneath the house is waiting."
+        } else if !i.blue_key {
+            "Find the blue key in the living room."
+        } else if !i.crowbar {
+            "Find the crowbar in the workshop on floor 2."
+        } else if !i.green_key {
+            "Use the blue key at the archive on floor 3. Find the green key."
+        } else if !i.red_key {
+            "Open the greenhouse on floor 5. Find the red key."
+        } else if !self.tower_open {
+            "Use the red key at the tower in the roof garden."
+        } else if !self.windmill_stopped {
+            "Climb the tower ladder. Stop the windmill machinery at the top."
+        } else if !self.power_off {
+            "Switch off the red generator in the greenhouse on floor 5."
+        } else if !i.keycard {
+            "Return to the kitchen. Take the keycard from the freezer."
+        } else if !self.boards_removed {
+            "Use the crowbar to remove the basement door boards."
+        } else {
+            "Unlock the basement door with the keycard."
         }
-
-        impact
+    }
+    pub fn open_basement(&mut self, i: &Inventory) -> Result<bool, &'static str> {
+        if !self.boards_removed {
+            if !i.crowbar {
+                return Err("You need a crowbar. Search the workshop on floor 2.");
+            }
+            self.boards_removed = true;
+            return Ok(false);
+        }
+        if !i.keycard {
+            return Err("You need the keycard from the kitchen freezer.");
+        }
+        self.basement_open = true;
+        Ok(true)
+    }
+    pub fn disable_generator(&mut self) -> Result<(), &'static str> {
+        if !self.windmill_stopped {
+            return Err(
+                "The windmill is still supplying power. Climb to the top of the red tower.",
+            );
+        }
+        self.power_off = true;
+        Ok(())
+    }
+    pub fn take_keycard(&self, i: &mut Inventory) -> Result<(), &'static str> {
+        if !self.power_off {
+            return Err("The freezer is iced shut. Cut the generator power upstairs.");
+        }
+        i.keycard = true;
+        Ok(())
+    }
+}
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn basement_requires_complete_puzzle_chain() {
+        let mut p = PuzzleProgress::default();
+        let mut i = Inventory::default();
+        assert!(p.open_basement(&i).is_err());
+        assert!(p.disable_generator().is_err());
+        assert!(p.take_keycard(&mut i).is_err());
+        i.crowbar = true;
+        assert_eq!(p.open_basement(&i), Ok(false));
+        assert!(p.open_basement(&i).is_err());
+        p.windmill_stopped = true;
+        p.disable_generator().unwrap();
+        p.take_keycard(&mut i).unwrap();
+        assert_eq!(p.open_basement(&i), Ok(true));
+        assert!(p.basement_open);
+    }
+    #[test]
+    fn every_mystery_door_checks_its_own_key_and_preserves_other_locks() {
+        let mut p = PuzzleProgress::default();
+        let mut i = Inventory::default();
+        for door in MysteryDoor::ALL {
+            assert!(door.unlock(&mut p, &i).is_err());
+        }
+        i.blue_key = true;
+        MysteryDoor::Archive.unlock(&mut p, &i).unwrap();
+        assert!(p.archive_open && !p.greenhouse_open && !p.tower_open);
+        assert!(MysteryDoor::Tower.unlock(&mut p, &i).is_err());
+        i.green_key = true;
+        MysteryDoor::Greenhouse.unlock(&mut p, &i).unwrap();
+        i.red_key = true;
+        MysteryDoor::Tower.unlock(&mut p, &i).unwrap();
+        assert!(MysteryDoor::ALL.into_iter().all(|d| d.is_open(&p)));
     }
 }
