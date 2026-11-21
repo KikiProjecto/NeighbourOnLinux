@@ -14,59 +14,6 @@ Explore a six-level impossible house, climb to its rooftop machinery, and follow
   </a>
 </p>
 
-<p align="center"><strong>Watch the 16-scene looping tour</strong> · Click the animation or any still image to open it full size.</p>
-
-The stills are 1280×720 captures from the native build. The animated preview cycles through the house at different times of day, rooms, the neighbor, and the underground finale.
-
-### The house through the day
-
-<table>
-<tr>
-<td align="center"><a href="docs/screenshots/morning.png"><img src="docs/screenshots/morning.png" width="460" alt="The impossible house in morning light"></a><br><strong>Morning</strong></td>
-<td align="center"><a href="docs/screenshots/afternoon.png"><img src="docs/screenshots/afternoon.png" width="460" alt="The impossible house in afternoon light"></a><br><strong>Afternoon</strong></td>
-</tr>
-<tr>
-<td align="center"><a href="docs/screenshots/evening.png"><img src="docs/screenshots/evening.png" width="460" alt="The house at evening"></a><br><strong>Evening</strong></td>
-<td align="center"><a href="docs/screenshots/night.png"><img src="docs/screenshots/night.png" width="460" alt="The house at night"></a><br><strong>Night</strong></td>
-</tr>
-</table>
-
-### Rooms and the neighbor
-
-<table>
-<tr>
-<td align="center"><a href="docs/screenshots/workshop.png"><img src="docs/screenshots/workshop.png" width="460" alt="The furnished workshop"></a><br><strong>Workshop</strong></td>
-<td align="center"><a href="docs/screenshots/archive.png"><img src="docs/screenshots/archive.png" width="460" alt="The blue-key archive"></a><br><strong>Archive</strong></td>
-</tr>
-<tr>
-<td align="center"><a href="docs/screenshots/tower.png"><img src="docs/screenshots/tower.png" width="460" alt="The rooftop tower machinery"></a><br><strong>Tower gallery</strong></td>
-<td align="center"><a href="docs/screenshots/neighbor.png"><img src="docs/screenshots/neighbor.png" width="460" alt="The articulated procedural neighbor"></a><br><strong>The neighbor</strong></td>
-</tr>
-<tr>
-<td align="center"><a href="docs/screenshots/kitchen-active.png"><img src="docs/screenshots/kitchen-active.png" width="460" alt="Kitchen appliances enabled for inspection"></a><br><strong>Kitchen</strong></td>
-<td align="center"><a href="docs/screenshots/living-room-active.png"><img src="docs/screenshots/living-room-active.png" width="460" alt="Living room household interactions"></a><br><strong>Living room</strong></td>
-</tr>
-<tr>
-<td align="center"><a href="docs/screenshots/bathroom-active.png"><img src="docs/screenshots/bathroom-active.png" width="460" alt="Bathroom shower interaction"></a><br><strong>Bathroom</strong></td>
-<td align="center"><a href="docs/screenshots/gallery-active.png"><img src="docs/screenshots/gallery-active.png" width="460" alt="Crooked gallery and paintings"></a><br><strong>Gallery</strong></td>
-</tr>
-</table>
-
-### Underground labyrinth
-
-<table>
-<tr>
-<td align="center"><a href="docs/screenshots/basement.png"><img src="docs/screenshots/basement.png" width="460" alt="Underground circuit machinery"></a><br><strong>Boiler room</strong></td>
-<td align="center"><a href="docs/screenshots/basement-lab.png"><img src="docs/screenshots/basement-lab.png" width="460" alt="Underground improvised laboratory"></a><br><strong>Laboratory</strong></td>
-</tr>
-<tr>
-<td align="center"><a href="docs/screenshots/basement-vault.png"><img src="docs/screenshots/basement-vault.png" width="460" alt="Underground evidence vault"></a><br><strong>Evidence vault</strong></td>
-<td align="center"><a href="docs/screenshots/controls-and-map.png"><img src="docs/screenshots/controls-and-map.png" width="460" alt="The basement map and controls guide"></a><br><strong>Map and controls</strong></td>
-</tr>
-</table>
-
-Inspection images document appearance and readability; they are not performance benchmarks or representations of unfinished mechanics.
-
 ## What you can play
 
 - First-person walking, sprinting, crouching, jumping, step-up collision, flashlight, and carry/drop/throw box interactions.
