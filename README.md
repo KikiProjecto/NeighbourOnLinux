@@ -1,4 +1,4 @@
-# Hello Neighbor — The Impossible House
+# Neighbour on Linux
 
 An unofficial, original **Rust + Bevy 0.20.1** stealth-mystery fan prototype inspired primarily by the full-release Act 3 house. It is a procedural, playable blockout—not a complete remake or a verified reconstruction of the original floor plan. The game includes no original game assets.
 
@@ -6,7 +6,7 @@ Explore a six-level impossible house, climb to its rooftop machinery, and follow
 
 > **Linux desktop:** Native Cargo builds and a verified Flatpak bundle are supported. The Flatpak uses the Freedesktop 26.08 runtime.
 
-## Screenshots
+## how it looks (latest ver)
 
 <p align="center">
   <a href="docs/screenshots/animated-gallery.gif">
